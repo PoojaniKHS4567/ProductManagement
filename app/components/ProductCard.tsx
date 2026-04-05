@@ -161,7 +161,7 @@ const confirmDelete = () => {
           )}
           
           <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-white font-medium">
-            🔥 Sold: {product.soldCount}
+            Sold: {product.soldCount}
           </div>
           
           {product.soldCount > 50 && (
@@ -223,7 +223,7 @@ const confirmDelete = () => {
       onConfirm={confirmDelete}
       productName={product.name}
     />
-    
+
     </Card>
   );
 };

@@ -8,7 +8,7 @@ import ProductCard from './components/ProductCard';
 import StatsCards from './components/StatsCards';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import ProductImage from './components/ProductImage'; // Fixed: Capital P
+import ProductImage from './components/ProductImage';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -30,7 +30,9 @@ export default function DashboardPage() {
     const statsData = getStats();
     setStats(statsData);
     
-    const sortedBySales = [...products].sort((a, b) => b.soldCount - a.soldCount);
+    // Filter products with soldCount > 20 for best sellers
+    const productsWithGoodSales = products.filter(p => p.soldCount > 20);
+    const sortedBySales = [...productsWithGoodSales].sort((a, b) => b.soldCount - a.soldCount);
     setBestSellers(sortedBySales.slice(0, 4));
     
     const sortedByDate = [...products].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -106,7 +108,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Best Sale Products */}
+      {/* Best Sale Products - Only showing products with more than 20 sales */}
       <div>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-gray-800 dark:text-white">🔥 Best Sale Products</h2>
@@ -117,16 +119,16 @@ export default function DashboardPage() {
         {bestSellers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {bestSellers.map((product) => (
-  <ProductCard 
-    key={product.id} 
-    product={product} 
-    showDescription={false}  // No description on dashboard
-  />
-))}
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                showDescription={false}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-xl">
-            <p className="text-gray-500 dark:text-gray-400">No products yet. Add your first product!</p>
+            <p className="text-gray-500 dark:text-gray-400">No products with more than 20 sales yet.</p>
           </div>
         )}
       </div>
