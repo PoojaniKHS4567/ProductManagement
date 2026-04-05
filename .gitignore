@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+.next/
+out/
+build/
+dist/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Debug files
+*.log
+npm-debug.log*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AI assistant files (optional - not needed for assessment)
+.cursor/
+.continue/
+
+# Note: next-env.d.ts should be committed (DO NOT ignore it)
